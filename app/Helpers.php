@@ -23,10 +23,10 @@ function getCartSubTotal()
 }
 
 
-function getCartData($shipping=0)
+function calculateMiniCart($tax=0, $shipping=0)
 {
 	$subtotal = getCartSubTotal();
-	$tax = (7.25 * getCartSubTotal()) / 100;
+	$tax = ($tax * getCartSubTotal()) / 100;
 
 	$data = [
 		'subtotal' => getCartSubTotal(),
@@ -36,4 +36,12 @@ function getCartData($shipping=0)
 	];
 
 	return $data;
+}
+
+
+function basketPreview()
+{
+	$cart = session()->get('store.cart');
+	$basket = array_slice($cart, 0, 3);
+	return $basket;
 }

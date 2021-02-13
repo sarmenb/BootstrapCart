@@ -20,7 +20,7 @@ class CartController extends Controller
                 'cartSubTotal' => getCartSubTotal(),
                 'cartShipping' => 0,
                 'cartTaxes' => 0,
-                'cartTotal' => getCartTotal()
+                'cartTotal' => getCartSubTotal()
             ]);
         }
         else
@@ -84,6 +84,7 @@ class CartController extends Controller
     	$product = Product::where('slug', $product_slug)->first();
 
     	$cart = [
+            'product_slug' => $product->slug,
 			'product_id' => $product->id,
 			'image' => $this->defaultImage($product->id),
 			'name' => $product->name,

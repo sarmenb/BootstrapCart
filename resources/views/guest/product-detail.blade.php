@@ -12,8 +12,8 @@
                     <ul>
                         <li><a href="/">Home</a></li>
                         <li>
-                            <a href="{{ route('guest.product-detail', $product->slug) }}">
-                                {{ $product->slug }}
+                            <a href="{{ route('guest.productDetail', $product->slug) }}">
+                                {{ $product->name }}
                             </a>
                         </li>
                     </ul>

@@ -45,7 +45,13 @@
             @empty
             <span class="text-secondary">No Products Found</span>
             @endforelse
+
+
 </div>
+
+  <div class="row">
+    {{ $products->links() }}
+  </div>
 </div>
 
 @endsection

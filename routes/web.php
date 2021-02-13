@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ShippingController;
+use App\Http\Controllers\ShopController;
 /*
 |--------------------------------------------------------------------------
 | Front Routes
@@ -17,9 +18,12 @@ use App\Http\Controllers\ShippingController;
 */
 
 Route::get('/', [GuestController::class, "index"])->name('guest.index');
-Route::get('shop/product/{productDetail}', [GuestController::class, "productDetail"])
-	->name('guest.product-detail');
-Route::view('shop', 'guest.shop')->name('guest.shop');
+Route::get('shop', [ShopController::class, "index"])->name('guest.shop');
+Route::get('shop/category/{category_slug}', [ShopController::class, "productByCategory"])->name('shop.category');
+
+Route::get('product/{productDetail}', [GuestController::class, "productDetail"])
+	->name('guest.productDetail');
+
 
 //CART Functionality
 Route::post('cart/product/{productSlug}', [CartController::class, "addCart"])->name('product.addCart');

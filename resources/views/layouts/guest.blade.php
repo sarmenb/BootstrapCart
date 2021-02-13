@@ -118,20 +118,33 @@
                                                 </a>
                                                
                                                 <ul class="dropdown-menu cart-list">
-                                                    @foreach(getCartItems() as $item)
+                                                    @foreach(basketPreview() as $item)
                                                     <li>
-                                                        <a href="#!" class="photo">
-                                                            <img src="{{ asset('storage/images/' . $item['image']) }}" class="cart-thumb" alt="..." />
+                                                        <a 
+                                                        
+                                                        href="{{ route('guest.productDetail', $item['product_slug']) }}" 
+                                                        class="photo">
+
+                                                            <img src="{{ asset('storage/images/' . $item['image']) }}" class="cart-thumb"/>
+
                                                         </a>
-                                                        <h6><a href="#!">{{ $item['name'] }}</a></h6>
+                                                        <h6>
+                                                            <a href="{{ route('guest.productDetail', $item['product_slug']) }}">
+                                                                {{ Str::limit($item['name'],20) }}
+                                                            </a>
+                                                        </h6>
                                                         <p>{{ $item['quantity'] }}x - <span class="price">${{ $item['price'] }}</span></p>
                                                     </li>
                                                     @endforeach
                                                     
                                                     <li class="total bg-theme">
                                                         <span class="foat-left pr-2">
+                                                            @if(count(getCartItems()) > 3)
+                                                            view cart continue...
+                                                            @else
                                                             <strong>Total</strong>: 
                                                             ${{ number_format(getCartSubtotal(),2) }}
+                                                            @endif
                                                         </span>
                                                         <a href="{{ route('guest.cart') }}" class="butn-style2 small white float-right w-auto"><span>Cart</span></a>
                                                     </li>
