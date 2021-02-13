@@ -18,7 +18,7 @@ class GateGuardController extends Controller
 		}
 		elseif(Auth::user()->hasRole('customer'))
 		{
-			return redirect('account/order-history');
+			return redirect('account/orders');
 		}
 		else
 		{

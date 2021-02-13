@@ -26,7 +26,7 @@
 
                     <div class="form-group">
                       <label class="form-label">Category</label>
-                      <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                      <input type="text" class="form-control" name="name" value="{{ old('name') }}" autofocus>
                       @error('name')
                       	<span class="text-danger">{{ $message }}</span>
                       @enderror

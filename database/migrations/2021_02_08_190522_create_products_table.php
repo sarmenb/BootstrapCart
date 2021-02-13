@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->decimal('price', 6, 2);
             $table->string('sku');
             $table->text('description');
+            $table->integer('is_featured')->default(0);
             $table->timestamps();
         });
     }

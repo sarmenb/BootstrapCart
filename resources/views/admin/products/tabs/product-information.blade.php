@@ -28,6 +28,18 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="form-label">Is Featured?</label>
+                        <select name="is_featured" class="form-control">
+                          <option value="0" @if($product->is_featured == 0) selected @endif>No</option>
+                          <option value="1" @if($product->is_featured == 1) selected @endif>Yes</option>
+                        </select>
+                        @error('is_featured')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                  </div>
+
+
+                    <div class="form-group">
                         <label class="form-label">Price</label>
                         <div class="input-group">
                             <div class="input-group-prepend">

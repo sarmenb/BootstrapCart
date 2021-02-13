@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Storage;
+use File;
 
 class reFreshCommand extends Command
 {
@@ -54,7 +54,6 @@ class reFreshCommand extends Command
         $this->call('db:seed');
         
         //clean up images uploaded
-        $files = Storage::files('images');
-        Storage::delete($files);
+        File::deleteDirectory(storage_path('app/public/images'));
     }
 }

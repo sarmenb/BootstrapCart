@@ -23,6 +23,7 @@ Trait ShippoShippingTrait
      */
 	public function validateShippingAddress($toAddress)
 	{
+		Shippo::setApiKey(env('SHIPPO_PRIVATE'));
 		$toAddress['validate'] = true;
 		$results = Shippo_Address::create($toAddress);
 
@@ -39,7 +40,9 @@ Trait ShippoShippingTrait
      */
 	public function getRates($fromAddress, $toAddress, $totalProductWeights)
 	{
+		Shippo::setApiKey(env('SHIPPO_PRIVATE'));
 		$toAddress['object_purpose'] = 'PURCHASE';
+		$fromAddress['object_purpose'] = 'PURCHASE';
 
 		$parcel = [
 			'length' => 5,
@@ -63,12 +66,23 @@ Trait ShippoShippingTrait
 		return $rates;
 	}
 
+	public function getShippingRates($object_id)
+	{
+		Shippo::setApiKey(env('SHIPPO_PRIVATE'));
+		$rates = Shippo_Shipment::get_shipping_rates([
+			'id' => $object_id
+		]);
+
+		return $rates; 
+	}
+
 	/**
      * Create Shipping Label
      *
      */
 	public function createShippingLabel($rateID)
 	{
+		Shippo::setApiKey(env('SHIPPO_PRIVATE'));
 		$label = Shippo_Transaction::create([
 			'rate' => $rateID,
 			'label_file_type' => 'PDF',

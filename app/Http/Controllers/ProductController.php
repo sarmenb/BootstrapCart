@@ -59,6 +59,7 @@ class ProductController extends Controller
             'category' => 'required',
             'name' => 'required|unique:products',
             'sku' => 'required',
+            'is_featured' => 'required',
             'price' => 'required',
             'description' => 'required',
             //'images' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000'
@@ -78,11 +79,12 @@ class ProductController extends Controller
         $product->slug = Str::slug($request->name);
 
         $product->sku = $request->sku;
+        $product->is_featured = $request->is_featured;    
         $product->description = $request->description;
         $product->price = $request->price;
         
 
-        $files = $this->UploadImage($request->images, 'app/public/images', 500,500);
+        $files = $this->UploadImage($request->images, 'app/public/images', 600,600);
 
         $product->save();
         
@@ -140,6 +142,7 @@ class ProductController extends Controller
             'category' => 'required',
             'name' => 'required',
             'slug' => 'required|unique:products,id',
+            'is_featured' =>  'required',
             'sku' => 'required',
             'price' => 'required',
             'description' => 'required',
@@ -151,6 +154,7 @@ class ProductController extends Controller
         $product->category_id = $category_id->id;
         $product->name = $request->name;
         $product->slug = Str::slug($request->slug);
+        $product->is_featured = $request->is_featured;
         $product->sku = $request->sku;
         $product->description = $request->description;
         $product->price = $request->price;
@@ -159,7 +163,7 @@ class ProductController extends Controller
         //product images
         if($request->has('product_images'))
         {
-            $files = $this->UploadImage($request->product_images, 'app/public/images', 500,500);
+            $files = $this->UploadImage($request->product_images, 'app/public/images', 600,600);
             
             foreach($files as $index => $file)
             {
@@ -196,7 +200,7 @@ class ProductController extends Controller
 
         foreach($images as $image)
         {
-            $this->DeleteImage('images', $image->image);
+            $this->DeleteImage(storage_path('app/public/images'), $image->image);
         }
 
         $product->delete();

@@ -48,6 +48,17 @@
               </div>
 
               <div class="form-group">
+                <label class="form-label">Is Featured?</label>
+                <select name="is_featured" class="form-control">
+                  <option value="0">No</option>
+                  <option value="1">Yes</option>
+                </select>
+                @error('is_featured')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
+              </div>
+
+              <div class="form-group">
                 <label class="form-label">Price</label>
                 <div class="input-group">
                   <div class="input-group-prepend">
