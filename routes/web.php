@@ -10,6 +10,8 @@ use App\Http\Controllers\GuestController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\PaymentController;
+
 /*
 |--------------------------------------------------------------------------
 | Front Routes
@@ -24,6 +26,7 @@ Route::get('shop/category/{category_slug}', [ShopController::class, "productByCa
 Route::get('product/{productDetail}', [GuestController::class, "productDetail"])
 	->name('guest.productDetail');
 
+Route::post('cart/empty', [CartController::class, "cartEmpty"])->name('cart.empty');
 
 //CART Functionality
 Route::post('cart/product/{productSlug}', [CartController::class, "addCart"])->name('product.addCart');
@@ -35,8 +38,10 @@ Route::post('checkout/address', [ShippingController::class, "AddressPost"])->nam
 Route::get('checkout/shipping', [ShippingController::class, "Shipping"])->name('guest.checkout.shipping');
 Route::post('checkout/shipping', [ShippingController::class, "ShippingPost"])->name('guest.checkout.shippingPost');
 
-Route::get('checkout/payment', [ShippingController::class, "Payment"])->name('guest.checkout.payment');
-Route::get('checkout/complete', [ShippingController::class, "Complete"])->name('guest.checkout.complete');
+Route::get('checkout/payment', [PaymentController::class, "index"])->name('guest.checkout.payment');
+Route::post('checkout/payment', [PaymentController::class, "indexPost"])->name('guest.checkout.paymentPost');
+
+Route::get('checkout/complete', [PaymentController::class, "Complete"])->name('guest.checkout.complete');
 
 Route::view('blog', 'guest.blog')->name('guest.blog');
 Route::view('blog/post', 'guest.blog-post')->name('guest.blog-post');

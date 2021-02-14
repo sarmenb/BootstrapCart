@@ -65,16 +65,7 @@ Trait ShippoShippingTrait
 
 		return $rates;
 	}
-
-	public function getShippingRates($object_id)
-	{
-		Shippo::setApiKey(env('SHIPPO_PRIVATE'));
-		$rates = Shippo_Shipment::get_shipping_rates([
-			'id' => $object_id
-		]);
-
-		return $rates; 
-	}
+	
 
 	/**
      * Create Shipping Label

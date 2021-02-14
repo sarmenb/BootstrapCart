@@ -32,6 +32,12 @@ class CartController extends Controller
         }
     }
 
+    public function cartEmpty(Request $request)
+    {
+        $request->session()->flush();
+        return redirect('/');
+    }
+
 
     public function addCart(Request $request, $slug)
     {

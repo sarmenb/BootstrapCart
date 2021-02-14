@@ -65,7 +65,7 @@
                                         <input type="text" name="quantity" value="{{ $item['quantity'] }}" />
                                     </td>
                                     <td class="product-subtotal text-left">
-                                        ${{ $item['quantity'] * $item['price'] }}
+                                        ${{ number_format($item['quantity'] * $item['price'], 2) }}
                                     </td>
                                     <td class="product-remove text-center">
                                         <a href="#!"><i class="fas fa-times"></i></a>
@@ -79,12 +79,16 @@
 
                     <!-- Start Button Set -->
                     <div class="col-12 border-bottom border-top padding-40px-tb sm-padding-20px-tb sm-margin-20px-bottom xs-margin-15px-bottom">
-                        <button class="butn-style2 small bg-color xs-margin-10px-bottom">
-                            <span>Empty Cart</span>
-                        </button>
-                        <button class="butn-style2 small bg-color float-right margin-10px-left xs-margin-10px-bottom">
-                            <span>Continue Shopping</span>
-                        </button>
+                        
+                        <form method="POST" action="{{ route('cart.empty') }}">
+                            @csrf
+                            <button type="submit" class="butn-style2 small bg-color xs-margin-10px-bottom">
+                                <span>Empty Cart</span>
+                            </button>
+                        </form>
+                        
+                        <a href="{{ route('guest.shop') }}" class="butn-style2 small bg-color float-right margin-10px-left xs-margin-10px-bottom">Continue Shopping</a>
+                        
                         <button class="butn-style2 small bg-color float-right margin-10px-left">
                             <span>Update Shopping Cart</span>
                         </button>
@@ -110,14 +114,14 @@
                                                 Shipping and Handling
                                             </th>
                                             <td class="text-uppercase text-right no-padding-right">
-                                                ${{ number_format($cartShipping, 2) }}
+                                                Calculated at next step
                                             </td>
                                         </tr>
                                         
                                         <tr class="total">
                                             <th class="text-uppercase text-right no-padding-right xs-no-padding">Taxes</th>
                                             <td class="text-uppercase text-right no-padding-right xs-no-padding">
-                                                ${{ number_format($cartTaxes, 2) }}
+                                                Calculated at next step
                                             </td>
                                         </tr>
                                         <tr>

@@ -98,6 +98,10 @@ class ShippingController extends Controller
 
     public function Shipping()
     {
+        if(!session()->has('store.cart'))
+        {
+            return redirect('/');
+        }
     	$shipping = session()->get('store.address');
     	$shippingTo = $shipping['shipping'];
 
@@ -115,21 +119,15 @@ class ShippingController extends Controller
                 $cart['tax'] = (7.25 * getCartSubTotal()) / 100;
                 $cart['total'] = $cart['subtotal'] + $cart['shipping'] + $cart['tax'];
                 
-                return $this->getShippingRates('c2e22215d6504b6685e911ee17841e1d');
-
     			return view('guest.checkout.shipping', [
                                 'rates' => $rates->rates,
                                 'subtotal' => $cart['subtotal'],
                                 'shipping' => $cart['shipping'],
                                 'tax' => $cart['tax'],
                                 'total' => $cart['total']
-    			             ]);
+    			         ]);
 
 
-    		}
-    		else
-    		{
-    			//there was a problem getting the rates.
     		}
     	}	
     	else
@@ -137,41 +135,20 @@ class ShippingController extends Controller
     		//address is not valid
     		return 'the address you entered is not valid';
     	}
-   //  	return view('guest.checkout.shipping', [
-			// 'subtotal' => getCartSubTotal(),
-			// 'shipping' => 0,
-			// 'tax' => 0,
-			// 'total' => getCartSubTotal()
-   //  	]);
     }
 
 
     public function ShippingPost(Request $request)
-    {
-        $d = $this->createShippingLabel($request->shippingMethod);
-        return $d;
-    }
+    {   
+        $method = $request->shippingMethod;
 
+        session()->put('store.shipping', [
+            'object_id' => $request->shippingMethod,
+            'rate' => request('rate_' . $method),
+            'service' => request('service_' . $method)
+        ]);
 
-    public function Payment()
-    {
-    	return view('guest.checkout.payment', [
-			'subtotal' => getCartSubTotal(),
-			'shipping' => 0,
-			'tax' => 0,
-			'total' => getCartSubTotal()
-    	]);
-    }
-
-
-    public function Complete()
-    {
-    	return view('guest.checkout.complete', [
-			'subtotal' => getCartSubTotal(),
-			'shipping' => 0,
-			'tax' => 0,
-			'total' => getCartSubTotal()
-    	]);
+        return redirect()->route('guest.checkout.payment');
     }
 
 

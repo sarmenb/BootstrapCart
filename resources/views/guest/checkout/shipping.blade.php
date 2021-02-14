@@ -76,6 +76,16 @@
                                                     type="radio" 
                                                     name="shippingMethod"
                                                     value="{{ $rate->object_id }}">
+
+                                                    <input 
+                                                    type="hidden" 
+                                                    name="rate_{{ $rate->object_id }}" 
+                                                    value="{{ number_format($rate->amount, 2) }}">
+
+                                                    <input 
+                                                    type="hidden" 
+                                                    name="service_{{ $rate->object_id }}" 
+                                                    value="{{ $rate->servicelevel->name }}">
                                                 </div>
                                             </td>
                                             <td class="text-left">

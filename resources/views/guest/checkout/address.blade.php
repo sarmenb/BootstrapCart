@@ -57,12 +57,12 @@
                         </div>
                     </div>
 
-                    <form method="POST" action="{{ route('guest.checkout.addressPost') }}">
-                        @csrf
+                    
                     <!-- start left pannel section -->
-                    <div class="col-lg-9 col-12 padding-40px-right sm-padding-15px-lr sm-margin-35px-bottom">
-
-                        <div class="common-block">
+                    <div class="col-9">
+                        <form method="POST" action="{{ route('guest.checkout.addressPost') }}">
+                            @csrf
+                            <div class="common-block">
 
                             <div class="inner-title">
                                 <h4 class="no-margin-bottom">Billing Address</h4>
@@ -752,17 +752,13 @@
                                         Continue
                                     </button>
                                     
-                                </div>
-
-                            </form>
-
-                        </div>
-
+                                </div></div>
+                        </form>
                     </div>
                     <!-- end left pannel section -->
 
                     <!-- start right pannel section -->
-                    <div class="col-lg-3 col-12 side-bar">
+                    <div class="col-3 side-bar">
 
                         <div class="widget">
 
@@ -778,11 +774,11 @@
                                     </tr>
                                     <tr>
                                         <th>Shipping:</th>
-                                        <td class="text-gray-dark">${{ number_format($shipping, 2) }}</td>
+                                        <td class="text-gray-dark">Calculated at next step</td>
                                     </tr>
                                     <tr>
                                         <th>Estimated tax:</th>
-                                        <td class="text-gray-dark">${{ number_format($tax, 2) }}</td>
+                                        <td class="text-gray-dark">Calculated at next step</td>
                                     </tr>
                                     <tr>
                                         <th>Total:</th>

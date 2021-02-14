@@ -184,8 +184,6 @@
                                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                                         <div class="card-body">
 
-                                            <h6 class="font-size14 font-weight-600 margin-20px-bottom">You currently have<span class="text-medium"> 9386</span> Reward Points to spend.</h6>
-
                                             <div class="custom-control custom-checkbox d-block">
                                                 <input class="custom-control-input" type="checkbox" id="reward_points">
                                                 <label class="custom-control-label" for="reward_points">Use my reward points to pay for this order.</label>
@@ -218,19 +216,19 @@
                                 <tbody>
                                     <tr>
                                         <th>Cart Subtotal:</th>
-                                        <td class="text-gray-dark">$2,548.50</td>
+                                        <td class="text-gray-dark">${{ number_format($subtotal, 2) }}</td>
                                     </tr>
                                     <tr>
                                         <th>Shipping:</th>
-                                        <td class="text-gray-dark">$26.50</td>
+                                        <td class="text-gray-dark">${{ number_format($shipping, 2) }}</td>
                                     </tr>
                                     <tr>
                                         <th>Estimated tax:</th>
-                                        <td class="text-gray-dark">$9.72</td>
+                                        <td class="text-gray-dark">${{ number_format($tax, 2) }}</td>
                                     </tr>
                                     <tr>
                                         <th>Total:</th>
-                                        <td class="text-lg text-gray-dark">$2,584.72</td>
+                                        <td class="text-lg text-gray-dark">${{ number_format($total, 2) }}</td>
                                     </tr>
                                 </tbody>
                             </table>
